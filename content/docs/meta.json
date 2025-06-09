@@ -1,0 +1,29 @@
+{
+  "guide": {
+    "title": "指南",
+    "position": 1,
+    "items": [
+      {
+        "title": "产品简介",
+        "to": "/docs/guide/intro",
+        "position": 1
+      },
+      {
+        "title": "快速开始",
+        "to": "/docs/guide/quick-start",
+        "position": 2
+      }
+    ]
+  },
+  "auth": {
+    "title": "更多",
+    "position": 2,
+    "items": [
+      {
+        "title": "联系我们",
+        "to": "/docs/more/contact",
+        "position": 1
+      }
+    ]
+  }
+}
