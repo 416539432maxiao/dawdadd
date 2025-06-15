@@ -132,12 +132,13 @@ const onSubmit = handleSubmit(async (values) => {
   }
 });
 </script>
+
 <template>
-  <Card class="w-full">
+  <Card class="w-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-md dark:shadow-xl rounded-2xl">
     <CardHeader>
-      <CardTitle class="text-2xl font-bold text-center">{{
-        mode === "signin" ? "登录" : "新用户注册"
-      }}</CardTitle>
+      <CardTitle class="text-2xl font-bold text-center text-gray-800 dark:text-white">
+        {{ mode === "signin" ? "登录" : "新用户注册" }}
+      </CardTitle>
     </CardHeader>
 
     <CardContent>
@@ -154,12 +155,13 @@ const onSubmit = handleSubmit(async (values) => {
         <div v-if="signMode === 'email'" class="space-y-4">
           <FormField name="email" v-slot="{ componentField }">
             <FormItem>
-              <FormLabel>邮箱</FormLabel>
+              <FormLabel class="text-gray-900 dark:text-white">邮箱</FormLabel>
               <FormControl>
                 <Input
                   v-bind="componentField"
                   type="email"
                   placeholder="请输入邮箱"
+                  class="bg-white text-gray-900 dark:bg-white/10 dark:text-white placeholder-gray-400 dark:placeholder-white/40 border border-gray-300 dark:border-white/10"
                 />
               </FormControl>
               <FormMessage />
@@ -168,12 +170,13 @@ const onSubmit = handleSubmit(async (values) => {
 
           <FormField name="password" v-slot="{ componentField }">
             <FormItem>
-              <FormLabel>密码</FormLabel>
+              <FormLabel class="text-gray-900 dark:text-white">密码</FormLabel>
               <FormControl>
                 <Input
                   v-bind="componentField"
                   type="password"
                   placeholder="请输入密码"
+                  class="bg-white text-gray-900 dark:bg-white/10 dark:text-white placeholder-gray-400 dark:placeholder-white/40 border border-gray-300 dark:border-white/10"
                 />
               </FormControl>
               <FormMessage />
@@ -184,12 +187,13 @@ const onSubmit = handleSubmit(async (values) => {
         <div v-else class="space-y-4">
           <FormField name="phone" v-slot="{ componentField }">
             <FormItem>
-              <FormLabel>手机号</FormLabel>
+              <FormLabel class="text-gray-900 dark:text-white">手机号</FormLabel>
               <FormControl>
                 <Input
                   v-bind="componentField"
                   type="tel"
                   placeholder="请输入手机号"
+                  class="bg-white text-gray-900 dark:bg-white/10 dark:text-white placeholder-gray-400 dark:placeholder-white/40 border border-gray-300 dark:border-white/10"
                 />
               </FormControl>
               <FormMessage />
@@ -198,32 +202,32 @@ const onSubmit = handleSubmit(async (values) => {
 
           <FormField name="code" v-slot="{ componentField }">
             <FormItem>
-              <FormLabel>验证码</FormLabel>
+              <FormLabel class="text-gray-900 dark:text-white">验证码</FormLabel>
               <div class="flex gap-2">
                 <FormControl>
                   <Input
                     v-bind="componentField"
                     type="text"
                     placeholder="请输入验证码"
-                    class="flex-1"
+                    class="flex-1 bg-white text-gray-900 dark:bg-white/10 dark:text-white placeholder-gray-400 dark:placeholder-white/40 border border-gray-300 dark:border-white/10"
                   />
                 </FormControl>
-                <!-- 如果要开启短信服务，请移除掉下面的:disabled="true" -->
                 <Button
                   type="button"
                   variant="outline"
                   :disabled="countdown > 0 || isCodeLoading || true"
                   @click="startCountdown"
                   :loading="isCodeLoading"
+                  class="hover:bg-white/10 text-gray-900 dark:text-white"
                 >
-                  <template v-if="isCodeLoading"> 发送中 </template>
+                  <template v-if="isCodeLoading">发送中</template>
                   <template v-else>
                     {{ countdown > 0 ? `${countdown}s` : "获取验证码" }}
                   </template>
                 </Button>
               </div>
               <FormMessage />
-              <FormDescription class="text-xs flex justify-end">
+              <FormDescription class="text-xs text-gray-500 dark:text-gray-300 flex justify-end">
                 说明：短信登录功能完备，只是因短信服务收费不提供演示
               </FormDescription>
             </FormItem>
@@ -233,7 +237,7 @@ const onSubmit = handleSubmit(async (values) => {
         <div>
           <Button
             type="submit"
-            class="w-full mt-4"
+            class="w-full mt-4 "
             :disabled="isLoading"
             :loading="isLoading"
           >
@@ -251,17 +255,17 @@ const onSubmit = handleSubmit(async (values) => {
 
         <div class="relative">
           <div class="absolute inset-0 flex items-center">
-            <span class="w-full border-t" />
+            <span class="w-full border-t border-gray-300 dark:border-white/20" />
           </div>
           <div class="relative flex justify-center text-xs uppercase">
-            <span class="bg-background px-2 text-muted-foreground">或者</span>
+            <span class="bg-white/80 dark:bg-white/5 px-2 text-gray-500 dark:text-muted-foreground">或者</span>
           </div>
         </div>
 
         <Button
           type="button"
           variant="outline"
-          class="w-full"
+          class="w-full text-gray-900 dark:text-white hover:bg-white/10"
           @click="onProviderSign('github')"
         >
           <LucideGithub class="h-4 w-4" />Github 账号{{
@@ -272,14 +276,15 @@ const onSubmit = handleSubmit(async (values) => {
         <Button
           type="button"
           variant="outline"
-          class="w-full"
+          class="w-full text-gray-900 dark:text-white hover:bg-white/10"
           @click="onProviderSign('google')"
         >
-          <img src="/images/google.svg" alt="google" class="h-4 w-4" />Google
-          账号{{ mode === "signin" ? "登录" : "注册" }}
+          <img src="/images/google.svg" alt="google" class="h-4 w-4" />Google 账号{{
+            mode === "signin" ? "登录" : "注册"
+          }}
         </Button>
 
-        <div class="text-center text-sm mt-4">
+        <div class="text-center text-sm mt-4 text-gray-700 dark:text-white">
           {{ mode === "signin" ? "还没有账号？" : "已有账号？" }}
           <NuxtLink
             :to="mode === 'signin' ? '/auth/signup' : '/auth/signin'"
@@ -292,3 +297,18 @@ const onSubmit = handleSubmit(async (values) => {
     </CardContent>
   </Card>
 </template>
+
+
+<style scoped>
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floating {
+  animation: floating 4s ease-in-out infinite;
+}
+</style>

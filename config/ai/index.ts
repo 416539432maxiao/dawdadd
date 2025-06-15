@@ -212,62 +212,7 @@ const aiConfig: AiConfig = {
       apikey: "DIFY_API_KEY_APP_INTERVIEW",
       accessType: "vip",
     },
-    interview18: {
-      id: "interview",
-      name: "教案设计",
-      description:
-        "一个智能的教案设计助手",
-      icon: "/images/note.svg",
-      
-      iconBgColor: "#FFD1DC",
-      type: "chat",
-      appCategory: "教案区",
-      path: "/ai/completion/interview",
-      apikey: "DIFY_API_KEY_APP_INTERVIEW",
-      accessType: "vip",
-    },
-    interview19: {
-      id: "interview",
-      name: "教案设计",
-      description:
-        "一个智能的教案设计助手",
-      icon: "/images/note.svg",
-      
-      iconBgColor: "#FFD1DC",
-      type: "chat",
-      appCategory: "教案区",
-      path: "/ai/completion/interview",
-      apikey: "DIFY_API_KEY_APP_INTERVIEW",
-      accessType: "vip",
-    },
-    interview20: {
-      id: "interview",
-      name: "教案设计",
-      description:
-        "一个智能的教案设计助手",
-      icon: "/images/note.svg",
-      
-      iconBgColor: "#FFD1DC",
-      type: "chat",
-      appCategory: "教案区",
-      path: "/ai/completion/interview",
-      apikey: "DIFY_API_KEY_APP_INTERVIEW",
-      accessType: "vip",
-    },
-    interview21: {
-      id: "interview",
-      name: "教案设计",
-      description:
-        "一个智能的教案设计助手",
-      icon: "/images/note.svg",
-      
-      iconBgColor: "#FFD1DC",
-      type: "chat",
-      appCategory: "教案区",
-      path: "/ai/completion/interview",
-      apikey: "DIFY_API_KEY_APP_INTERVIEW",
-      accessType: "vip",
-    },
+ 
     
 
   },

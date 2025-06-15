@@ -1,1 +1,6 @@
-'node_modules\ndist\n.env\n.env.local' 
+# 忽略依赖库
+node_modules/
+# 忽略 Nuxt 构建产物
+.nuxt/
+# 忽略环境变量文件
+.env

@@ -10,7 +10,8 @@ const isDark = computed(() => colorMode.value === "dark");
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button data-test="color-mode-toggle" variant="ghost">
-        <component :is="isDark ? SunIcon : MoonIcon" class="w-24 h-24" />
+        <component :is="isDark ? SunIcon : MoonIcon" class="!w-8 !h-8" />
+
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent>

@@ -50,86 +50,113 @@ const filteredApps = computed(() => {
 </script>
 
 
+
 <template>
   <div class="space-y-12">
-    <!-- 如果是“全部”分类，分区显示 -->
+    <!-- 分类显示：全部分类 -->
     <template v-if="isAllCategory">
-      <div v-for="(apps, category) in categorizedApps" :key="category">
-        <h2 class="text-m font-bold text-gray-700 mb-2 pl-3 border-l-4 border-primary/60 py-1 rounded">
+      <div
+        v-for="(apps, category) in categorizedApps"
+        :key="category"
+        class="space-y-4"
+      >
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-white pl-4 border-l-4 border-primary/60 py-1">
           {{ category }}
         </h2>
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6  justify-center">
-          <Card v-for="app in apps" :key="app.path"
-      
-           class="  relative flex h-full rounded-2xl border hover:border-primary      bg-gradient-to-br from-white/50 to-white/20 dark:from-white/10 dark:to-white/5          shadow-sm  hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg transition-all duration-300 cursor-pointer group"
-            @click="handleClick(app)">
-
-            <div class="absolute -top-1 right-0">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+        >
+          <Card
+            v-for="app in apps"
+            :key="app.path"
+            class="relative group flex flex-col h-full p-5 rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 shadow-lg backdrop-blur-md hover:-translate-y-1 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:border-primary cursor-pointer"
+            @click="handleClick(app)"
+          >
+            <!-- 类型标签 -->
+            <div class="absolute -top-2 right-2">
               <span
-                class=" shadow-md ring-1 ring-inset ring-black/5 dark:ring-white/10 px-1.5 py-0.5 text-xs font-semibold rounded-2xl border border-opacity-40 transition-all duration-300 opacity-80 hover:opacity-100"
+                class="px-2 py-0.5 text-xs font-semibold rounded-full border shadow-md ring-1 ring-black/5 dark:ring-white/10 transition-all"
                 :class="{
-                  'bg-gradient-to-r from-green-100 to-green-200 text-green-800 border-green-300': app.accessType === 'free',
-                  'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300': app.accessType === 'points',
-                  'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300': app.accessType === 'vip'
-                }">
-                {{
-                  app.accessType === 'free' ? '免费' :
-                    app.accessType === 'points' ? '积分' : 'VIP'
-                }}
+                  'bg-green-100 text-green-800 border-green-300': app.accessType === 'free',
+                  'bg-blue-100 text-blue-800 border-blue-300': app.accessType === 'points',
+                  'bg-purple-100 text-purple-800 border-purple-300': app.accessType === 'vip'
+                }"
+              >
+                {{ app.accessType === 'free' ? '免费' : app.accessType === 'points' ? '积分' : 'VIP' }}
               </span>
             </div>
 
-            <div class="flex gap-4 sm:gap-4 p-4 sm:p-5">
-              <div
-              
-                class="h-16 w-16 shadow-inner    border border-white/50 rounded-xl flex items-center justify-center text-3xl icon-container transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
-                :style="{ backgroundColor: app.iconBgColor, boxShadow: 'inset 0 0 4px rgba(0,0,0,0.1)' }">
-            
-                <img :src="app.icon" class="w-10 h-10 object-contain" alt="app icon" />
-              </div>
-              <div class="flex flex-col flex-1">
-                <h3 class="font-medium  text-base sm:text-lg truncate">{{ app.name }}</h3>
-                <p class="  hidden sm:block text-xs sm:text-sm  text-muted-foreground  mt-1  ">{{ app.description }}</p>
-              </div>
-            </div>
+           <!-- 卡片中的主体内容 -->
+<div class="flex items-center sm:items-start gap-4 sm:gap-4 flex-col sm:flex-row text-center sm:text-left">
+  <!-- 图标部分 -->
+  <div
+    class="h-12 w-12 sm:h-16 sm:w-16 rounded-xl border border-white/30 dark:border-white/10 shadow-inner flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform"
+    :style="{ backgroundColor: app.iconBgColor }"
+  >
+    <img :src="app.icon" class="w-6 h-6 sm:w-10 sm:h-10 object-contain" alt="icon" />
+  </div>
+
+  <!-- 文字部分 -->
+  <div class="flex flex-col flex-1">
+    <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white truncate">
+      {{ app.name }}
+    </h3>
+    <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+      {{ app.description }}
+    </p>
+  </div>
+</div>
           </Card>
         </div>
       </div>
     </template>
 
-    <!-- 否则只展示选中分类 -->
+    <!-- 分类显示：非全部分类 -->
     <template v-else>
       <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <Card v-for="app in filteredApps" :key="app.path"
-          class="relative flex h-full rounded-2xl  border-gray-100  hover:border-primary transition-all duration-300 cursor-pointer group hhover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg"
-          @click="handleClick(app)">
-          <div class="absolute -top-1 right-0">
-              <span
-                class=" shadow-md ring-1 ring-inset ring-black/5 dark:ring-white/10 px-1.5 py-0.5  text-xs font-semibold rounded-2xl border border-opacity-40 transition-all duration-300 opacity-80 hover:opacity-100"
-                :class="{
-                  'bg-gradient-to-r from-green-100 to-green-200 text-green-800 border-green-300': app.accessType === 'free',
-                  'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300': app.accessType === 'points',
-                  'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300': app.accessType === 'vip'
-                }">
-                {{
-                  app.accessType === 'free' ? '免费' :
-                    app.accessType === 'points' ? '积分' : 'VIP'
-                }}
-              </span>
-            </div>
-          <div class="flex gap-2 sm:gap-4 p-4 sm:p-5">
-            <div
-              class="h-16 w-16 shadow-inner border  border-gray-100  rounded-xl flex items-center justify-center text-3xl icon-container transition-transform duration-300 group-hover:rotate-12"
-              :style="{ backgroundColor: app.iconBgColor }">
-              <img :src="app.icon" class="w-10 h-10 object-contain" alt="app icon" />
-            </div>
-            <div class="flex flex-col flex-1">
-              <h3 class="font-medium text-lg">{{ app.name }}</h3>
-              <p class="text-sm text-muted-foreground mt-2">{{ app.description }}</p>
-            </div>
+        <Card
+          v-for="app in filteredApps"
+          :key="app.path"
+          class="relative group flex flex-col h-full p-5 rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 shadow-lg backdrop-blur-md hover:-translate-y-1 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:border-primary cursor-pointer"
+          @click="handleClick(app)"
+        >
+          <!-- 类型标签 -->
+          <div class="absolute -top-2 right-2">
+            <span
+              class="px-2 py-0.5 text-xs font-semibold rounded-full border shadow-md ring-1 ring-black/5 dark:ring-white/10 transition-all"
+              :class="{
+                'bg-green-100 text-green-800 border-green-300': app.accessType === 'free',
+                'bg-blue-100 text-blue-800 border-blue-300': app.accessType === 'points',
+                'bg-purple-100 text-purple-800 border-purple-300': app.accessType === 'vip'
+              }"
+            >
+              {{ app.accessType === 'free' ? '免费' : app.accessType === 'points' ? '积分' : 'VIP' }}
+            </span>
           </div>
+
+          <!-- 卡片中的主体内容 -->
+<div class="flex items-center sm:items-start gap-4 sm:gap-4 flex-col sm:flex-row text-center sm:text-left">
+  <!-- 图标部分 -->
+  <div
+    class="h-12 w-12 sm:h-16 sm:w-16 rounded-xl border border-white/30 dark:border-white/10 shadow-inner flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform"
+    :style="{ backgroundColor: app.iconBgColor }"
+  >
+    <img :src="app.icon" class="w-6 h-6 sm:w-10 sm:h-10 object-contain" alt="icon" />
+  </div>
+
+  <!-- 文字部分 -->
+  <div class="flex flex-col flex-1">
+    <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white truncate">
+      {{ app.name }}
+    </h3>
+    <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+      {{ app.description }}
+    </p>
+  </div>
+</div>
         </Card>
       </div>
     </template>
   </div>
-</template>   
+</template>
+

@@ -21,10 +21,17 @@
 html.dark {
   background-color: var(--colors-background);
 }
+
+
+html {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
 </style>
 
 <script setup lang="ts">
 useHead({
+
+  
   titleTemplate: "%s - NuxtBase",
   meta: [
     { charset: "utf-8" },
@@ -61,11 +68,17 @@ useHead({
   ],
   link: [
     {
+
+      
       rel: "icon",
       type: "image/x-icon",
       href: "https://demo.nuxtbase.site/favicons/favicon.ico",
     },
     { rel: "canonical", href: "https://demo.nuxtbase.site" },
+    {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap",
+  },
   ],
 });
 
@@ -85,3 +98,6 @@ onUnmounted(() => {
   }
 });
 </script>
+
+
+

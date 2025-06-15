@@ -4,9 +4,7 @@
 import {
   Settings2Icon,
   LogOutIcon,
-  CreditCardIcon,
-  MoonIcon,
-  SunIcon,
+
   StarIcon,
   MessageSquareMore,
   UserIcon,
@@ -95,7 +93,7 @@ const recentChatItems = [
 ];
 
 const bottomMenuItems = [
-  
+
   {
     label: "联系我们",
     icon: MessageCircle,
@@ -209,256 +207,227 @@ const handleClick = (app: any) => {
 
 
 <template>
-  <aside
-    class="flex h-screen w-[250px] flex-col border border-white/50 shadow-xl bg-slate-50  dark:bg-gray-900 shadow-xs   fixed left-0 top-0 z-30 ">
+  <aside class="flex h-screen w-[250px] flex-col 
+         border border-white/10 
+         bg-white/70 backdrop-blur-md 
+         dark:bg-gray-900/80 dark:backdrop-blur-lg dark:border-white/10
+         shadow-lg dark:shadow-[0_0_30px_rgba(168,85,247,0.1)]
+         hover:shadow-purple-500/10 hover:border-white/20 dark:hover:border-purple-500/40
+         transition-all duration-300
+         rounded-tr-2xl fixed left-0 top-0 z-30">
     <div class="flex items-center gap-2 p-6">
       <NuxtLink to="/">
         <Logo class="h-15 mt-0" />
       </NuxtLink>
     </div>
 
-
-
-
     <nav class="flex-1 mt-4 space-y-1 p-5 text-lg">
       <NuxtLink v-for="item in menuItems1" :key="item.to" :to="item.to"
-        class="group flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-[1px]"
+        class="group flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:bg-primary/5 hover:text-primary"
         :class="[
           isActive(item.to)
-            ? 'bg-primary/10 text-primary'
-            : 'text-muted-foreground hover:bg-gray-50 hover:text-primary'
+            ? 'bg-primary/10 text-primary dark:text-primary-300'
+            : 'text-muted-foreground dark:text-gray-300 hover:bg-primary/5 hover:text-primary dark:hover:text-primary-300'
         ]" :aria-current="isActive(item.to) ? 'page' : null" @click="onNavigate?.()">
         <component :is="item.icon" class="size-6 group-hover:rotate-12 transition-transform duration-300" />
         <span>{{ item.label }}</span>
-        <span v-if="item.badge" class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">
+        <span v-if="item.badge"
+          class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary dark:bg-primary/30 dark:text-primary-300">
           {{ item.badge }}
         </span>
       </NuxtLink>
+
+      <!-- MyCollection -->
       <div v-for="item in MyCollection" :key="item.to"
-        class="group cursor-pointer flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-[1px]"
+        class="group cursor-pointer flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:bg-primary/5 hover:text-primary"
         :class="[
           isActive(item.to)
-            ? 'bg-primary/10 text-primary'
-            : 'text-muted-foreground hover:bg-gray-50 hover:text-primary'
+            ? 'bg-primary/10 text-primary dark:text-primary-300'
+            : 'text-muted-foreground dark:text-gray-300 hover:bg-primary/5 hover:text-primary dark:hover:text-primary-300'
         ]" @click="toggleSubmenuPanel(item.label)">
         <component :is="item.icon" class="size-6 group-hover:rotate-12 transition-transform duration-300" />
         <span>{{ item.label }}</span>
-        <span v-if="item.badge" class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">
+        <span v-if="item.badge"
+          class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary dark:bg-primary/30 dark:text-primary-300">
           {{ item.badge }}
         </span>
       </div>
 
+      <!-- menuItems2 -->
       <NuxtLink v-for="item in menuItems2" :key="item.to" :to="item.to"
-        class="group flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-[1px]"
+        class="group flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:bg-primary/5 hover:text-primary"
         :class="[
           isActive(item.to)
-            ? 'bg-primary/10 text-primary'
-            : 'text-muted-foreground hover:bg-gray-50 hover:text-primary'
+            ? 'bg-primary/10 text-primary dark:text-primary-300'
+            : 'text-muted-foreground dark:text-gray-300 hover:bg-primary/5 hover:text-primary dark:hover:text-primary-300'
         ]" :aria-current="isActive(item.to) ? 'page' : null" @click="onNavigate?.()">
         <component :is="item.icon" class="size-6 group-hover:rotate-12 transition-transform duration-300" />
         <span>{{ item.label }}</span>
-        <span v-if="item.badge" class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">
+        <span v-if="item.badge"
+          class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary dark:bg-primary/30 dark:text-primary-300">
           {{ item.badge }}
         </span>
       </NuxtLink>
 
+      <div class="border-t border-white/10 my-2"></div>
 
-
-      <div class="border-t my-2"></div>
-
+      <!-- recentChatItems -->
       <div v-for="item in recentChatItems" :key="item.to"
         class="group cursor-pointer flex items-center gap-2 rounded-lg px-3 py-4 text-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-[1px]"
         :class="[
           isActive(item.to)
-            ? 'bg-primary/10 text-primary'
-            : 'text-muted-foreground hover:bg-gray-50 hover:text-primary'
+            ? 'bg-primary/10 text-primary dark:text-primary-300'
+            : 'text-muted-foreground dark:text-gray-300 hover:bg-primary/5 hover:text-primary dark:hover:text-primary-300'
         ]" @click="toggleSubmenuPanel(item.label)">
         <component :is="item.icon" class="size-6 group-hover:rotate-12 transition-transform duration-300" />
         <span>{{ item.label }}</span>
-        <span v-if="item.badge" class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">
+        <span v-if="item.badge"
+          class="ml-auto rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary dark:bg-primary/30 dark:text-primary-300">
           {{ item.badge }}
         </span>
       </div>
     </nav>
 
-    <div class="border-t p-3">
+    <div class="border-t border-white/10 p-3">
+      <div class="group relative">
+        <div
+          class="flex items-center gap-2 rounded-lg px-3 py-4 text-lg text-muted-foreground cursor-pointer transition-all duration-200 hover:-translate-y-[1px] hover:text-primary dark:text-gray-300 dark:hover:text-primary">
+          <AlertCircle class="size-6 group-hover:rotate-12 transition-transform duration-300" />
+          <span class="font-medium">关于酷师</span>
+        </div>
 
-  <div class="group relative">
-    <!-- 使用 lucide-vue-next 图标 + 文字，样式调整使其更协调 -->
-    <div
-      class="flex items-center gap-2 rounded-lg px-3 py-4 text-lg text-muted-foreground cursor-pointer transition-all duration-200 hover:-translate-y-[1px] hover:text-primary">
-      <AlertCircle class="size-6 group-hover:rotate-12 transition-transform duration-300" />
-      <span class="font-medium">关于酷师</span>
-    </div>
-
-    <div
-      class="absolute bottom-full left-0 w-full invisible group-hover:visible bg-background border rounded-lg shadow-lg z-50">
-      <nav class="space-y-1 p-2">
-        <NuxtLink v-for="item in bottomMenuItems" :key="item.to" :to="item.to"
-          class="flex items-center gap-3 rounded-lg px-3 py-2 text-m text-muted-foreground transition-colors hover:bg-primary/5 hover:text-primary"
-          @click="onNavigate?.()">
-          <component :is="item.icon" class="size-5" />
-          <span>{{ item.label }}</span>
-        </NuxtLink>
-        <button
-              class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-lg text-muted-foreground transition-colors hover:bg-primary/5 hover:text-primary"
+        <div
+          class="absolute bottom-full left-0 w-full invisible group-hover:visible bg-background border border-white/10  dark:bg-white/10 dark:backdrop-blur-lg dark:border-white/10 dark:text-gray-200 rounded-lg shadow-xl z-50">
+          <nav class="space-y-1 p-2">
+            <NuxtLink v-for="item in bottomMenuItems" :key="item.to" :to="item.to"
+              class="flex items-center gap-3 rounded-lg px-3 py-2 text-m text-muted-foreground dark:text-gray-300 transition-colors hover:bg-primary/5 hover:text-primary dark:hover:text-primary">
+              <component :is="item.icon" class="size-5" />
+              <span>{{ item.label }}</span>
+            </NuxtLink>
+            <button
+              class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-m text-muted-foreground dark:text-gray-300 transition-colors hover:bg-primary/5 hover:text-primary dark:hover:text-primary"
               @click="signOut">
               <LogOutIcon class="size-6" />
               <span>退出登录</span>
             </button>
 
-        <!-- 分割线 -->
-        <div class="my-2 border-t border-gray-200 dark:border-white/10"></div>
+            <div class="my-2 border-t border-gray-200 dark:border-white/10"></div>
 
-        <!-- 备案号 -->
-        <div class="text-m  text-gray-400 dark:text-white/30 px-4 py-2">
-          陕ICP备20250001号
+            <div class="text-m text-gray-400 dark:text-gray-500 px-4 py-2">
+              陕ICP备20250001号
+            </div>
+          </nav>
         </div>
-      </nav>
+      </div>
     </div>
-
-  </div>
-</div>
-
-
   </aside>
 
 
-
-
   <transition name="fade">
-    <div v-if="submenuVisible" class="fixed inset-0 z-20 bg-black/30 backdrop-blur-md"
-      @click.self="submenuVisible = false" />
-  </transition>
+  <div v-if="submenuVisible" class="fixed inset-0 z-20 bg-black/30 backdrop-blur-md" @click.self="submenuVisible = false" />
+</transition>
 
-  <transition name="slide-bounce">
+<!-- 最近对话面板 -->
+<transition name="slide-bounce">
+  <div v-if="submenuVisible && activeSubmenu === '最近对话'"
+    class="fixed top-0 left-[250px] w-[280px] h-screen -ml-[1px] shadow-r-xl border rounded-r-lg border-gray-200 bg-slate-50  dark:bg-gray-900/80 dark:backdrop-blur-lg dark:border-white/10
+           shadow-lg dark:shadow-[0_0_30px_rgba(168,85,247,0.1)] transition-all duration-300 z-40">
+    <div class="p-6 border-b border-gray-200 dark:border-white/10 font-serif font-medium tracking-tight text-m">
+      <div class="flex items-center justify-between text-gray-800 dark:text-white">
+        <div>最近对话</div>
+        <div class="flex space-x-2 relative z-20">
+          <button
+            @click="showAddFavorites = true"
+            class="flex items-center group gap-1 text-primary px-3 py-1 bg-primary/10 rounded-lg shadow-sm transition-all duration-300 hover:bg-primary/20 hover:shadow-xl hover:-translate-y-1 hover:scale-105">
+            <Settings2Icon class="w-4 h-4 group-hover:rotate-12 transition-all" />
+            管理
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="p-4 space-y-2 rounded-lg">
+      <NuxtLink v-for="item in submenus[activeSubmenu]" :key="item.to" :to="item.to"
+        class="block px-4 py-2 rounded-lg text-lg text-gray-700 dark:text-gray-300 hover:bg-primary/5 hover:text-primary transition-colors"
+        @click="submenuVisible = false">
+        {{ item.label }}
+      </NuxtLink>
+    </nav>
+  </div>
+</transition>
 
-    <div v-if="submenuVisible && activeSubmenu === '最近对话'"
-      class="fixed top-0 left-[250px] w-[280px] h-screen -ml-[1px]  shadow-r-xl border  rounded-r-lg  border-gray-200 bg-slate-50   z-40 ">
-          <div class="p-6 border-b font-[Noto+Serif+SC] font-medium tracking-tight text-m">
-  <div class="flex items-center justify-between">
-    <div>最近对话</div>
-    <div class="flex space-x-2 relative z-20">
-      <button
-        @click="showAddFavorites = true"
-        class="flex items-center group gap-1  text-primary px-3 py-1 bg-primary/10 rounded-lg shadow-sm transform transition-all duration-300 hover:bg-primary/20 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
-      >
-        <Settings2Icon class="w-4 h-4 transition-all group-hover:rotate-12" />
-        管理
-      </button>
+<!-- 弹窗：移除收藏 -->
+<transition name="fade">
+  <div v-if="showRemoveFavorites"
+    class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center"
+    @click.self="showRemoveFavorites = false">
+    <div class="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow-xl w-[500px] p-6">
+      <h2 class="text-lg font-bold mb-4">移除收藏</h2>
+      <!-- 可添加内容 -->
     </div>
   </div>
-</div>
-      <nav class="p-4 space-y-2 rounded-lg">
-        <NuxtLink v-for="item in submenus[activeSubmenu as keyof typeof submenus]" :key="item.to" :to="item.to"
-          class="block px-4 py-2 rounded-lg text-lg text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
-          @click="submenuVisible = false">
-          {{ item.label }}
-        </NuxtLink>
-      </nav>
-    </div>
-  </transition>
+</transition>
 
-
-
-  <!-- 移除收藏的弹窗框 -->
-  <transition name="fade">
-    <div v-if="showRemoveFavorites"
-      class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center"
-      @click.self="showRemoveFavorites = false">
-      <div class="bg-white rounded-xl shadow-xl w-[500px] p-6">
-        <h2 class="text-lg font-bold mb-4">移除收藏</h2>
-        <!-- 显示当前已收藏的卡片供用户移除 -->
-      </div>
-    </div>
-  </transition>
-
-
-
-  <!-- 添加收藏的弹窗框 -->
-  <transition name="fade">
-    <div v-if="showAddFavorites"
-      class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center"
-      @click.self="showAddFavorites = false">
-      <div class="bg-white rounded-xl shadow-xl w-[500px] p-6">
-        <h2 class="text-lg font-bold mb-4">选择你想收藏的应用</h2>
-        <!-- 应用选择卡片区域 -->
-        <!-- 你可以在此插入列表让用户选择并点击添加 -->
-      </div>
-    </div>
-  </transition>
-
-
-
-
-  <!-- 收藏侧边栏 -->
-  <transition name="slide-bounce">
-
-
-    <div v-if="submenuVisible && activeSubmenu === '收藏'"
-      class="fixed top-0 left-[250px] w-[280px] h-screen -ml-[1px]  border  rounded-r-lg  shadow-r-xl border-gray-200 bg-slate-50  z-40  ">
-
-      <div class="p-6 border-b font-[Noto+Serif+SC] font-medium tracking-tight text-m">
-  <div class="flex items-center justify-between">
-    <div>收藏应用</div>
-    <div class="flex space-x-2 relative z-20">
-      <button
-        @click="showAddFavorites = true"
-        class="flex items-center group gap-1  text-primary px-3 py-1 bg-primary/10 rounded-lg shadow-sm transform transition-all duration-300 hover:bg-primary/20 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
-      >
-        <Settings2Icon class="w-4 h-4 transition-all group-hover:rotate-12" />
-        编辑
-      </button>
+<!-- 弹窗：添加收藏 -->
+<transition name="fade">
+  <div v-if="showAddFavorites"
+    class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center"
+    @click.self="showAddFavorites = false">
+    <div class="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow-xl w-[500px] p-6">
+      <h2 class="text-lg font-bold mb-4">选择你想收藏的应用</h2>
+      <!-- 应用列表内容 -->
     </div>
   </div>
-</div>
- 
+</transition>
 
-
-
-      <div class=" flex  flex-col p-4  mt-2 space-y-4">
-        <!-- 按钮区域，提升层级 -->
-
-       
-
-
-        <Card v-for="app in favoriteApps" :key="app.id"
-          class="relative flex flex-col rounded-2xl border-xl border-gray hover:border-primary transition-all duration-300 cursor-pointer group hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]"
-          @click="handleClick(app)">
-          <div class="absolute -top-1 right-0">
-            <span
-              class="px-1.5 py-0.5 text-xs font-semibold   rounded-2xl shadow-sm border border-opacity-40 transition-all duration-300 opacity-80 hover:opacity-100"
-              :class="{
-                'bg-gradient-to-r from-green-100 to-green-200 text-green-800 border-green-300': app.accessType === 'free',
-                'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300': app.accessType === 'points',
-                'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300': app.accessType === 'vip'
-              }">
-              {{
-                app.accessType === 'free'
-                  ? '免费'
-                  : app.accessType === 'points'
-                    ? '积分'
-                    : 'VIP'
-              }}
-            </span>
-          </div>
-          <div class="flex gap-4 p-4">
-            <div
-              class="h-14 w-14 shadow-inner border-s border-white/50 rounded-xl   flex items-center justify-center text-3xl icon-container transition-transform duration-300 group-hover:rotate-12"
-              :style="{ backgroundColor: app.iconBgColor }">
-              <img :src="app.icon" class="w-8 h-8 object-contain" alt="app icon" />
-            </div>
-            <div class="flex flex-col flex-1">
-              <h3 class="font-medium text-base">{{ app.name }}</h3>
-              <p class="text-xs text-muted-foreground mt-1 leading-snug line-clamp-2">
-                {{ app.description }}
-              </p>
-            </div>
-          </div>
-        </Card>
+<!-- 收藏面板 -->
+<transition name="slide-bounce">
+  <div v-if="submenuVisible && activeSubmenu === '收藏'"
+    class="fixed top-0 left-[250px] w-[280px] h-screen -ml-[1px] border rounded-r-lg shadow-r-xl border-gray-200 bg-slate-50  dark:bg-gray-900/80 dark:backdrop-blur-lg dark:border-white/10
+           shadow-lg dark:shadow-[0_0_30px_rgba(168,85,247,0.1)] transition-all duration-300 z-40">
+    <div class="p-6 border-b border-gray-200 dark:border-white/10 font-serif font-medium tracking-tight text-m">
+      <div class="flex items-center justify-between text-gray-800 dark:text-white">
+        <div>收藏应用</div>
+        <div class="flex space-x-2 relative z-20">
+          <button
+            @click="showAddFavorites = true"
+            class="flex items-center group gap-1 text-primary px-3 py-1 bg-primary/10 rounded-lg shadow-sm transition-all duration-300 hover:bg-primary/20 hover:shadow-xl hover:-translate-y-1 hover:scale-105">
+            <Settings2Icon class="w-4 h-4 group-hover:rotate-12 transition-all" />
+            编辑
+          </button>
+        </div>
       </div>
     </div>
-  </transition>
+    <div class="flex flex-col p-4 mt-2 space-y-4">
+      <Card v-for="app in favoriteApps" :key="app.id"
+        class="relative flex flex-col rounded-2xl border border-gray-200 dark:border-white/10 transition-all duration-300 cursor-pointer group hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]"
+        @click="handleClick(app)">
+        <div class="absolute -top-1 right-0">
+          <span
+            class="px-1.5 py-0.5 text-xs font-semibold rounded-2xl shadow-sm border border-opacity-40 transition-all duration-300 opacity-80 hover:opacity-100"
+            :class="{
+              'bg-gradient-to-r from-green-100 to-green-200 text-green-800 border-green-300': app.accessType === 'free',
+              'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300': app.accessType === 'points',
+              'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300': app.accessType === 'vip'
+            }">
+            {{ app.accessType === 'free' ? '免费' : app.accessType === 'points' ? '积分' : 'VIP' }}
+          </span>
+        </div>
+        <div class="flex gap-4 p-4">
+          <div class="h-14 w-14 shadow-inner border-s border-white/50 rounded-xl flex items-center justify-center text-3xl icon-container transition-transform duration-300 group-hover:rotate-12"
+            :style="{ backgroundColor: app.iconBgColor }">
+            <img :src="app.icon" class="w-8 h-8 object-contain" alt="app icon" />
+          </div>
+          <div class="flex flex-col flex-1">
+            <h3 class="font-medium text-base text-gray-800 dark:text-white">{{ app.name }}</h3>
+            <p class="text-xs text-muted-foreground dark:text-gray-400 mt-1 leading-snug line-clamp-2">
+              {{ app.description }}
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </div>
+</transition>
 </template>
 
 <style>
@@ -467,6 +436,9 @@ const handleClick = (app: any) => {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
   will-change: transform, opacity;
 }
+
+
+
 
 .slide-top-enter-from,
 .slide-top-leave-to {
@@ -514,7 +486,3 @@ const handleClick = (app: any) => {
   opacity: 1;
 }
 </style>
-
-
-
-     
