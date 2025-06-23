@@ -10,7 +10,7 @@ const aiConfig: AiConfig = {
       icon: "/images/note.svg",
       
       iconBgColor: "#FFD1DC",
-      type: "completion",
+      type: "chat",
       appCategory: "教案区",
       path: "/ai/chat/interview",
       apikey: "DIFY_API_KEY_APP_INTERVIEW",
