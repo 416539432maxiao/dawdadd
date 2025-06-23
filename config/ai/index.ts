@@ -12,7 +12,7 @@ const aiConfig: AiConfig = {
       iconBgColor: "#FFD1DC",
       type: "completion",
       appCategory: "教案区",
-      path: "/ai/completion/interview",
+      path: "/ai/chat/interview",
       apikey: "DIFY_API_KEY_APP_INTERVIEW",
       accessType: "vip",
     },
